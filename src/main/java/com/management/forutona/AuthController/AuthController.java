@@ -21,7 +21,6 @@ public class AuthController {
 
     @PostMapping(value = "/api/v1/Auth/ReFreshToken")
     public Userinfo RefreshToken(@RequestBody Userinfo info){
-
         return authdao.RefreshToken(info);
     }
 
