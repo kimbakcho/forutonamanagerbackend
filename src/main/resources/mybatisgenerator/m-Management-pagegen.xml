@@ -7,7 +7,8 @@
     <classPathEntry
             location="C:\Users\backho\.m2\repository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>
 
-    <context id="context" targetRuntime="MyBatis3Simple">
+    <context id="context" targetRuntime="MyBatis3Simple" >
+
 
         <commentGenerator>
             <property name="suppressAllComments" value="false"/>
@@ -21,7 +22,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.management.forutona.AuthDto" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.management.forutona.PageContentDto" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -30,13 +31,15 @@
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.management.forutona.AuthDao" type="XMLMAPPER" targetProject="src/main/java">
+        <javaClientGenerator targetPackage="com.management.forutona.PageContentDao" type="XMLMAPPER" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table schema="managementdb" tableName="UserInfo" enableUpdateByPrimaryKey="true" enableDeleteByExample="true"
-               enableUpdateByExample="true" />
-
+        <table schema="managementdb" tableName="NoticePage" enableUpdateByPrimaryKey="true" enableDeleteByExample="true"
+               enableUpdateByExample="true" >
+            <property name="useActualColumnNames" value="true"/>
+            <property name="useColumnIndexes" value="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>

@@ -97,10 +97,10 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <configurationFile>src/main/resources/mybatisgenerator/m-Management-gen.xml</configurationFile>
+                    <configurationFile>src/main/resources/mybatisgenerator/m-Management-pagegen.xml</configurationFile>
                     <overwrite>false</overwrite>
                     <tableNames>
-                        managementdb.UserInfo
+                        managementdb.NoticePage
                     </tableNames>
                 </configuration>
                 <dependencies>

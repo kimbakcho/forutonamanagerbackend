@@ -25,7 +25,7 @@ public class AuthDao {
         UserinfoMapper mapper = WebsqlSession.getMapper(UserinfoMapper.class);
         Userinfo item = mapper.selectByPrimaryKey(info.getUid());
         if(item.getPassword().equals(info.getPassword())){
-            item.setAccesstoken(makeToken(info));
+            item.setAccesstoken(makeToken(item));
         }
         item.setPassword("");
         return item;
@@ -48,6 +48,7 @@ public class AuthDao {
         String token = JWT.create()
                 .withIssuer("forutona")
                 .withExpiresAt(calendar.getTime())
+                .withClaim("Role",info.getRole())
                 .withClaim("uid",info.getUid())
                 .withClaim("nickname",info.getNickname())
                 .sign(algorithm);
