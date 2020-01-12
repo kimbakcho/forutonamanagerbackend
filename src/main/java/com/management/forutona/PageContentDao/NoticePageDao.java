@@ -34,4 +34,14 @@ public class NoticePageDao {
         return mapper.selectByPrimaryKey(item.getIdx());
     }
 
+    public int updatedoc(Noticepage item){
+        NoticepageMapper mapper =  WebsqlSession.getMapper(NoticepageMapper.class);
+        return mapper.updateByPrimaryKey(item);
+    }
+
+    public int deletedoc(Noticepage item){
+        NoticepageMapper mapper =  WebsqlSession.getMapper(NoticepageMapper.class);
+        return mapper.deleteByPrimaryKey(item.getIdx());
+    }
+
 }
