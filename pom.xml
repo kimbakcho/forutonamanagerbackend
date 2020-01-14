@@ -97,10 +97,10 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <configurationFile>src/main/resources/mybatisgenerator/a-Auth-gen.xml</configurationFile>
+                    <configurationFile>src/main/resources/mybatisgenerator/a-Fcube-gen.xml</configurationFile>
                     <overwrite>false</overwrite>
                     <tableNames>
-                        forutona.UserInfo
+                        forutona.FcubeQuestPageView
                     </tableNames>
                 </configuration>
                 <dependencies>

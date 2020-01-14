@@ -113,7 +113,7 @@
     from UserInfo
     <where>
       <if test="searchtype != '' and searchtext != '' ">
-        <if test="searchtype == 'nickName' " >
+        <if test="searchtype == 'nickName' ">
           NickName LIKE CONCAT(#{searchtext},'%')
         </if>
         <if test="searchtype == 'email'">
@@ -139,7 +139,7 @@
     select count(*) FROM UserInfo
     <where>
       <if test="searchtype != '' and searchtext != '' ">
-        <if test="searchtype == 'nickName' " >
+        <if test="searchtype == 'nickName' ">
           NickName LIKE CONCAT(#{searchtext},'%')
         </if>
         <if test="searchtype == 'email'">
