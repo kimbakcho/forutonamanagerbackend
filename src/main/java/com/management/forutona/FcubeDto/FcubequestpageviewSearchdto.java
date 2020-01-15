@@ -10,4 +10,5 @@ public class FcubequestpageviewSearchdto {
     String sortDesc;
     String searchtype;
     String searchtext;
+    String cubeType;
 }

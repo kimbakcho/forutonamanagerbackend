@@ -107,6 +107,9 @@
       <if test="searchtype == 'placeAddress' and searchtext != '' ">
         MATCH (CubeName) AGAINST ('*${searchtext}*' IN BOOLEAN MODE)
       </if>
+      <if test="cubeType != '' and cubeType != null">
+        AND CubeType = #{cubeType}
+      </if>
     </where>
     <if test="sortBy != null">
       ORDER BY ${sortBy}
@@ -117,6 +120,7 @@
     <if test=" sortBy != null and sortDesc == 'false'">
       asc
     </if>
+
     Limit #{limit} OFFSET #{offset}
   </select>
 
@@ -132,6 +136,9 @@
       </if>
       <if test="searchtype == 'placeAddress' and searchtext != ''">
         MATCH (CubeName) AGAINST ('*${searchtext}*' IN BOOLEAN MODE)
+      </if>
+      <if test="cubeType != '' and cubeType != null">
+        AND CubeType = #{cubeType}
       </if>
     </where>
   </select>
