@@ -7,6 +7,8 @@ import com.management.forutona.FcubeDto.Fcubequestpageview;
 import com.management.forutona.FcubeDto.FcubequestpageviewSearchdto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,9 +34,13 @@ public class FcubeController {
         return fcubeDao.selectFcubeQuestPageViewlength(searchdto);
     }
 
-    @GetMapping(value = "/v1/Fcue/QuestCubePage/selectFcubeQuestPageView")
+    @GetMapping(value = "/v1/Fcube/QuestCubePage/selectFcubeQuestPageView")
     List<Fcubequestpageview> selectFcubeQuestPageView(FcubequestpageviewSearchdto searchdto){
         return fcubeDao.selectFcubeQuestPageView(searchdto);
     }
 
+    @PostMapping(value = "/v1/Fcube/deletefcube")
+    int deletefcube(@RequestParam String cubeuuid){
+        return fcubeDao.deleteFcube(cubeuuid);
+    }
 }

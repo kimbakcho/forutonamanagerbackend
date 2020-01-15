@@ -35,5 +35,10 @@ public class FcubeDao {
         return mapper.selectFcubeQuestPageViewlength(searchdto);
     }
 
+    public int deleteFcube(String cubeuuid){
+        FcubeMapper fcubeMapper = AppsqlSession.getMapper(FcubeMapper.class);
+
+        return fcubeMapper.deleteByPrimaryKey(cubeuuid);
+    }
 
 }
