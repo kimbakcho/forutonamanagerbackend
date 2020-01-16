@@ -40,6 +40,10 @@
             <property name="useActualColumnNames" value="true"/>
             <property name="useColumnIndexes" value="true"/>
         </table>
-
+        <table schema="managementdb" tableName="FAQPage" enableUpdateByPrimaryKey="true" enableDeleteByExample="true"
+               enableUpdateByExample="true" >
+            <property name="useActualColumnNames" value="true"/>
+            <property name="useColumnIndexes" value="true"/>
+        </table>
     </context>
 </generatorConfiguration>
