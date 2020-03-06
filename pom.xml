@@ -76,7 +76,15 @@
             <artifactId>java-jwt</artifactId>
             <version>3.9.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <version>2.1.0.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -97,10 +105,10 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <configurationFile>src/main/resources/mybatisgenerator/m-Management-pagegen.xml</configurationFile>
+                    <configurationFile>src/main/resources/mybatisgenerator/m-Management-gen.xml</configurationFile>
                     <overwrite>false</overwrite>
                     <tableNames>
-                        managementdb.FAQPage
+                        managementdb.UserInfo
                     </tableNames>
                 </configuration>
                 <dependencies>

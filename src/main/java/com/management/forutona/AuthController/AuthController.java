@@ -13,15 +13,6 @@ public class AuthController {
     @Autowired
     AuthDao authdao;
 
-    @PostMapping(value = "/api/v1/Auth/Login")
-    public Userinfo Login(@RequestBody Userinfo info){
 
-        return authdao.Login(info);
-    }
-
-    @PostMapping(value = "/api/v1/Auth/ReFreshToken")
-    public Userinfo RefreshToken(@RequestBody Userinfo info){
-        return authdao.RefreshToken(info);
-    }
 
 }
