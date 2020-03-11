@@ -23,8 +23,6 @@ public class FireBaseAdmin {
                     .build();
 
             admin = FirebaseApp.initializeApp(options);
-
-
         }catch (Exception ex){
             System.out.println(ex);
         }

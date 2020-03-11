@@ -1,6 +1,6 @@
 package com.management.forutona;
 
-import com.management.forutona.AuthDto.UserService;
+import com.management.forutona.Auth.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

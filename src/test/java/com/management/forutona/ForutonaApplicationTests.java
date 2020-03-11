@@ -1,7 +1,6 @@
 package com.management.forutona;
 
-import com.management.forutona.AuthController.AuthController;
-import com.management.forutona.AuthDto.Userinfo;
+import com.management.forutona.Auth.AuthController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
