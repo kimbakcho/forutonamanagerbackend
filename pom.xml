@@ -27,21 +27,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <tomcat.publish.path>/forutonamanagertest</tomcat.publish.path>
+                <tomcat.publish.path>/forutonamanagermentbtest</tomcat.publish.path>
                 <spring.profiles.active>local</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>real</id>
             <properties>
-                <tomcat.publish.path>/forutonamanagerbeta</tomcat.publish.path>
+                <tomcat.publish.path>/forutonamanagermentb</tomcat.publish.path>
                 <spring.profiles.active>real</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>realtest</id>
             <properties>
-                <tomcat.publish.path>/forutonamanagerrealtest</tomcat.publish.path>
+                <tomcat.publish.path>/forutonamanagermentbrealtest</tomcat.publish.path>
                 <spring.profiles.active>realtest</spring.profiles.active>
             </properties>
         </profile>
@@ -52,11 +52,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <version>2.1.9.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,6 +102,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
@@ -137,6 +136,11 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+            <version>5.3.4.RELEASE</version>
         </dependency>
     </dependencies>
 

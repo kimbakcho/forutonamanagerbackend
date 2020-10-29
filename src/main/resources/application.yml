@@ -4,11 +4,7 @@ spring:
 ---
 spring:
   profiles: local
-  jpa:
-    open-in-view: false
-    properties:
-      hibernate:
-        default_batch_fetch_size: 1000
+
 logging:
   level:
     org:
@@ -29,18 +25,22 @@ server:
       charset: UTF-8
       force: true
       enabled: true
+
   port: 8443
-mvc:
-  async:
-    request-timeout: -1
+
+resource:
+  redirectUrlTemplate: http://localhost:8080/RedirectPage/child
+  authorizationUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/authorize
+  tokenUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/token
+  userInfoUrl: https://forutona.thkomeet.com:8443/mAuth/getMe
+  clientId: forutonaMain
+  clientSecret: forutona1020
+
+
 ---
 spring:
   profiles: realtest
-  jpa:
-    open-in-view: false
-    properties:
-      hibernate:
-        default_batch_fetch_size: 1000
+
 logging:
   level:
     org:
@@ -61,8 +61,13 @@ server:
       charset: UTF-8
       force: true
       enabled: true
-  port: 8443
-mvc:
-  async:
-    request-timeout: -1
+
+resource:
+  redirectUrlTemplate: https://forutona.thkomeet.com:8443/forutonamanagement/RedirectPage/child
+  authorizationUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/authorize
+  tokenUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/token
+  userInfoUrl: https://forutona.thkomeet.com:8443/mAuth/getMe
+  clientId: forutonaMain
+  clientSecret: forutona1020
+
 ---

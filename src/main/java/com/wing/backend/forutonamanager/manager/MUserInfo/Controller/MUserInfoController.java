@@ -1,5 +1,6 @@
 package com.wing.backend.forutonamanager.manager.MUserInfo.Controller;
 
+import com.nimbusds.openid.connect.sdk.claims.UserInfo;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Dto.MUserInfoResDto;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Dto.SignUpReqDto;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Service.MUserInfoService;
