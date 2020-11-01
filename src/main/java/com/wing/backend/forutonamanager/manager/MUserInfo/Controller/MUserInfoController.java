@@ -29,6 +29,11 @@ public class MUserInfoController {
         return mUserInfoService.signInUser(userInfoAdapter.getAccount().getUid());
     }
 
+    @PostMapping("/MUserInfo/TEST")
+    String postTest(@AuthenticationPrincipal UserInfoAdapter userInfoAdapter) throws Exception {
+        return "TEST";
+    }
+
     @GetMapping("/test")
     String TEST() throws Exception {
         return "TEST";

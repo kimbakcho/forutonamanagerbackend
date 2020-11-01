@@ -25,17 +25,13 @@ server:
       charset: UTF-8
       force: true
       enabled: true
-
   port: 8443
-
-resource:
-  redirectUrlTemplate: http://localhost:8080/RedirectPage/child
-  authorizationUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/authorize
-  tokenUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/token
-  userInfoUrl: https://forutona.thkomeet.com:8443/mAuth/getMe
-  clientId: forutonaMain
-  clientSecret: forutona1020
-
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: bns-ssl
 
 ---
 spring:
@@ -62,12 +58,5 @@ server:
       force: true
       enabled: true
 
-resource:
-  redirectUrlTemplate: https://forutona.thkomeet.com:8443/forutonamanagement/RedirectPage/child
-  authorizationUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/authorize
-  tokenUrl: https://forutona.thkomeet.com:8443/mAuth/oauth/token
-  userInfoUrl: https://forutona.thkomeet.com:8443/mAuth/getMe
-  clientId: forutonaMain
-  clientSecret: forutona1020
 
 ---
