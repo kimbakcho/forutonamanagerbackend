@@ -1,5 +1,6 @@
 package com.wing.backend.forutonamanager.manager.Security;
 
+import com.wing.backend.forutonamanager.Preference.CustomPreference;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     final OAuth2SPAFilter oAuth2SPAFilter;
 
+    final CustomPreference customPreference;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,6 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .oauth2Login();
 
+        http
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl(customPreference.logoutSuccessRedirectUrl());
 
         http.authorizeRequests()
                 .anyRequest().authenticated();

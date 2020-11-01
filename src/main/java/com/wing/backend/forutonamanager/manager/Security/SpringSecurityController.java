@@ -1,5 +1,7 @@
 package com.wing.backend.forutonamanager.manager.Security;
 
+import com.wing.backend.forutonamanager.Preference.CustomPreference;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.Request;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -14,11 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
+@RequiredArgsConstructor
 public class SpringSecurityController {
+
+    final CustomPreference customPreference;
 
     @GetMapping("/SPALogin")
     public void SPALogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DefaultRedirectStrategy defaultRedirectStrategy = new DefaultRedirectStrategy();
-        defaultRedirectStrategy.sendRedirect(request,response,"https://forutona.thkomeet.com:8443/");
+        defaultRedirectStrategy.sendRedirect(request,response,customPreference.loginSuccessRedirectUrl());
     }
 }
