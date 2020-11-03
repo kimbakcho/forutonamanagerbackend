@@ -25,6 +25,7 @@ server:
       charset: UTF-8
       force: true
       enabled: true
+    context-path: '/forutonamanagermentbtest'
   port: 8443
   ssl:
     enabled: true

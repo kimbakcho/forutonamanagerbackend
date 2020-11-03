@@ -5,6 +5,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -25,7 +26,8 @@ public class OAuth2SPAFilter extends GenericFilterBean {
             if (exception instanceof AuthenticationException) {
                 throw exception;
             } else if (exception instanceof AccessDeniedException) {
-                if(request.getRequestURI().equals("/SPALogin")){
+                AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher("/SPALogin");
+                if(antPathRequestMatcher.matches(request)){
                     throw exception;
                 }else {
                     response.sendError(401,"AccessDeniedException");

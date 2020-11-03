@@ -3,6 +3,7 @@ package com.wing.backend.forutonamanager.manager.Security;
 import com.wing.backend.forutonamanager.Preference.CustomPreference;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.connector.Request;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -25,5 +26,14 @@ public class SpringSecurityController {
     public void SPALogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
         DefaultRedirectStrategy defaultRedirectStrategy = new DefaultRedirectStrategy();
         defaultRedirectStrategy.sendRedirect(request,response,customPreference.loginSuccessRedirectUrl());
+    }
+
+    @GetMapping("/isLogin")
+    public boolean isLogin(@AuthenticationPrincipal Object principal){
+        if(principal.equals("anonymousUser")){
+            return false;
+        }else {
+            return true;
+        }
     }
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,9 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -39,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     final CustomPreference customPreference;
 
+    final CustomUserService customUserService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -47,11 +54,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/login**","/favicon.ico")
+                .antMatchers("/login**","/favicon.ico","/isLogin")
                 .permitAll();
 
         http
-                .oauth2Login();
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/termsConditions/Terms**")
+                .permitAll();
+
+        http
+                .oauth2Login()
+                .userInfoEndpoint().userService(customUserService);
 
         http
                 .logout()
@@ -69,56 +82,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    @Profile("real")
     public ClientRegistrationRepository realClientRegistrationRepository() {
         return new InMemoryClientRegistrationRepository(this.realClientRegistration());
     }
 
-    @Profile("real")
     private ClientRegistration realClientRegistration() {
-
-        return ClientRegistration.withRegistrationId("forutonaMain")
-                .clientId("forutonaMain")
-                .clientSecret("forutona1020")
+        return ClientRegistration.withRegistrationId(customPreference.oauth2registrationId())
+                .clientId(customPreference.oauth2clientId())
+                .clientSecret(customPreference.oauth2clientSecret())
                 .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUriTemplate("https://localhost:8443/login/oauth2/code/forutonaMain")
+                .redirectUriTemplate(customPreference.oauth2RedirectUri())
                 .scope("message.read", "message.write")
-                .authorizationUri("https://forutona.thkomeet.com:8443/mAuth/oauth/authorize")
-                .tokenUri("https://forutona.thkomeet.com:8443/mAuth/oauth/token")
-                .userInfoUri("https://forutona.thkomeet.com:8443/mAuth/MUserInfo/Me")
+                .authorizationUri(customPreference.oauth2authorizationUri())
+                .tokenUri(customPreference.oauth2tokenUri())
+                .userInfoUri(customPreference.oauth2userInfoUri())
                 .userNameAttributeName(IdTokenClaimNames.SUB)
-                .clientName("forutonaMain")
-                .registrationId("forutonaMain")
+                .clientName(customPreference.oauth2clientName())
+                .registrationId(customPreference.oauth2registrationId())
                 .build();
     }
-
-    @Bean
-    @Profile("local")
-    public ClientRegistrationRepository localClientRegistrationRepository() {
-        return new InMemoryClientRegistrationRepository(this.localAuthClientRegistration());
-    }
-
-    @Profile("local")
-    private ClientRegistration localAuthClientRegistration() {
-
-        return ClientRegistration.withRegistrationId("TestAuth")
-                .clientId("TestAuth")
-                .clientSecret("TestAuth")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUriTemplate("https://localhost:8443/login/oauth2/code/TestAuth")
-                .scope("message.read", "message.write")
-                .authorizationUri("https://forutona.thkomeet.com:8443/mAuth/oauth/authorize")
-                .tokenUri("https://forutona.thkomeet.com:8443/mAuth/oauth/token")
-                .userInfoUri("https://forutona.thkomeet.com:8443/mAuth/MUserInfo/Me")
-                .userNameAttributeName(IdTokenClaimNames.SUB)
-                .clientName("TestAuth")
-                .registrationId("TestAuth")
-                .build();
-    }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
