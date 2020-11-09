@@ -56,9 +56,7 @@ public class TermsConditionsService {
         termsConditions.setModifyUser(mUserInfo);
         termsConditions.setModifyDate(LocalDateTime.now());
 
-        TermsConditions saveItem = termsConditionsDataRepository.save(termsConditions);
-
-        return TermsConditionsResDto.fromTermsConditions(saveItem);
+        return TermsConditionsResDto.fromTermsConditions(termsConditions);
     }
 
 

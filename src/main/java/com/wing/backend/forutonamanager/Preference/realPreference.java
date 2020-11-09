@@ -8,17 +8,17 @@ import org.springframework.stereotype.Component;
 public class realPreference implements CustomPreference {
     @Override
     public String loginSuccessRedirectUrl() {
-        return "https://forutona.thkomeet.com:8443/forutonamanagement";
+        return "https://forutona.thkomeet.com:8443/forutonamanagerment";
     }
 
     @Override
     public String logoutSuccessRedirectUrl() {
-        return "https://forutona.thkomeet.com:8443/forutonamanagement/";
+        return "https://forutona.thkomeet.com:8443/forutonamanagerment/";
     }
 
     @Override
     public String oauth2RedirectUri() {
-        return "https://forutona.thkomeet.com:8443/forutonamanagermentb/login/oauth2/code/forutonaMain";
+        return "https://forutona.thkomeet.com:8443/bforutonamanagerment/login/oauth2/code/forutonaMain";
     }
 
     @Override

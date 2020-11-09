@@ -23,7 +23,10 @@ public class SpringSecurityController {
     final CustomPreference customPreference;
 
     @GetMapping("/SPALogin")
-    public void SPALogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void SPALogin(@AuthenticationPrincipal Object principal,
+            HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("SPALogin");
+        System.out.println(principal.toString());
         DefaultRedirectStrategy defaultRedirectStrategy = new DefaultRedirectStrategy();
         defaultRedirectStrategy.sendRedirect(request,response,customPreference.loginSuccessRedirectUrl());
     }

@@ -22,9 +22,6 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -34,9 +31,6 @@ import javax.crypto.spec.SecretKeySpec;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final static String SecretKey = "Zm9ydXRvbmF3aW5nIWZvcnV0b25hd2luZw==";
-
-    final JwtAuthConverter jwtAuthConverter;
 
     final  CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
@@ -49,18 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        System.out.println("SecurityConfig Config");
+
         http
                 .csrf().disable();
 
-        http
-                .authorizeRequests()
-                .antMatchers("/login**","/favicon.ico","/isLogin")
-                .permitAll();
-
-        http
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/termsConditions/Terms**")
-                .permitAll();
 
         http
                 .oauth2Login()
@@ -70,6 +57,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl(customPreference.logoutSuccessRedirectUrl());
+
+        http
+                .authorizeRequests()
+                .antMatchers("/login**","/favicon.ico","/isLogin")
+                .permitAll();
+
+        http
+                .authorizeRequests()
+                .antMatchers("/SPALogin")
+                .authenticated();
+
+        http
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/termsConditions/Terms**")
+                .permitAll();
+
 
         http.authorizeRequests()
                 .anyRequest().authenticated();
@@ -106,14 +109,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
-    }
-
-    @Bean
-    public JwtDecoder customDecoder() {
-        NimbusJwtDecoder decoder = NimbusJwtDecoder.withSecretKey(new SecretKeySpec(SecretKey.getBytes(), "HMACSHA256"))
-                .macAlgorithm(MacAlgorithm.HS256)
-                .build();
-        return decoder;
     }
 
     @Bean

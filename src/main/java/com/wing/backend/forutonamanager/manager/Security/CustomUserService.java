@@ -23,7 +23,7 @@ public class CustomUserService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
         MUserInfo mUserInfo = mUserInfoDataRepository.findById((String) oAuth2User.getAttributes().get("uid")).get();
         CustomOAuth2User customOAuth2User = new CustomOAuth2User(oAuth2User.getAuthorities()
-                ,oAuth2User.getAttributes(),oAuth2User.getName(), MUserInfoResDto.fromUserInfoResDto(mUserInfo));
+                ,oAuth2User.getAttributes(),"sub", MUserInfoResDto.fromUserInfoResDto(mUserInfo));
         return customOAuth2User;
     }
 }

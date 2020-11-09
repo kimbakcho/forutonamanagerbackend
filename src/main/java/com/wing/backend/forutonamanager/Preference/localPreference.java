@@ -20,7 +20,7 @@ public class localPreference implements CustomPreference {
 
     @Override
     public String oauth2RedirectUri() {
-        return "https://localhost:8443/forutonamanagermentbtest/login/oauth2/code/TestAuth";
+        return "https://localhost:8443/bforutonamanagermenttest/login/oauth2/code/TestAuth";
     }
 
     @Override

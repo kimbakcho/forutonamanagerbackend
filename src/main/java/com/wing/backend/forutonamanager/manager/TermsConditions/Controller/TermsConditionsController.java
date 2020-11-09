@@ -16,24 +16,24 @@ public class TermsConditionsController {
 
     final TermsConditionsService termsConditionsService;
 
-    @GetMapping("/Terms")
+    @GetMapping
     public TermsConditionsResDto getTermsConditions(@RequestParam Integer idx){
         return termsConditionsService.getTerms(idx);
     }
 
-    @PostMapping("/Terms")
+    @PostMapping
     public TermsConditionsResDto saveTermsConditions(@AuthenticationPrincipal CustomOAuth2User customOAuth2User,
                                                      @RequestBody TermsConditionsSaveDto termsConditionsSaveDto){
         return termsConditionsService.saveTermsConditions(customOAuth2User,termsConditionsSaveDto);
     }
 
-    @PutMapping("/Terms")
+    @PutMapping
     public TermsConditionsResDto updateTermsConditions(@AuthenticationPrincipal CustomOAuth2User customOAuth2User,
                                                        @RequestBody TermsConditionsUpdateDto termsConditionsUpdateDto){
         return termsConditionsService.updateTermsConditions(customOAuth2User,termsConditionsUpdateDto);
     }
 
-    @DeleteMapping("/Terms")
+    @DeleteMapping
     public Integer deleteTermsConditions(@RequestParam Integer idx){
         return termsConditionsService.deleteTermsConditions(idx);
     }

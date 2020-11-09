@@ -27,21 +27,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <tomcat.publish.path>/forutonamanagermentbtest</tomcat.publish.path>
+                <tomcat.publish.path>/bforutonamanagermenttest</tomcat.publish.path>
                 <spring.profiles.active>local</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>real</id>
             <properties>
-                <tomcat.publish.path>/forutonamanagermentb</tomcat.publish.path>
+                <tomcat.publish.path>/bforutonamanagerment</tomcat.publish.path>
                 <spring.profiles.active>real</spring.profiles.active>
             </properties>
         </profile>
         <profile>
             <id>realtest</id>
             <properties>
-                <tomcat.publish.path>/forutonamanagermentbrealtest</tomcat.publish.path>
+                <tomcat.publish.path>/bforutonamanagermentrealtest</tomcat.publish.path>
                 <spring.profiles.active>realtest</spring.profiles.active>
             </properties>
         </profile>
@@ -101,10 +101,8 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>

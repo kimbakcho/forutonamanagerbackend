@@ -2,6 +2,7 @@ package com.wing.backend.forutonamanager.manager.TermsConditions.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wing.backend.forutonamanager.RestDoc.RestDocsConfiguration;
+import com.wing.backend.forutonamanager.SecurityTestUtil.TestBase;
 import com.wing.backend.forutonamanager.SecurityTestUtil.WithMockCustomUser;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Domain.MUserInfo;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Repository.MUserInfoDataRepository;
@@ -30,13 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("local")
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-@Transactional
-class TermsConditionsControllerTest {
+class TermsConditionsControllerTest extends TestBase {
 
     @Autowired
     MockMvc mockMvc;
@@ -60,7 +55,7 @@ class TermsConditionsControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
 
         mockMvc.perform(
-                post("/termsConditions/Terms")
+                post("/termsConditions")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(termsConditionsSaveDto))
         )
@@ -104,7 +99,7 @@ class TermsConditionsControllerTest {
 
 
         mockMvc.perform(
-                put("/termsConditions/Terms")
+                put("/termsConditions")
                         .content(objectMapper.writeValueAsString(termsConditionsUpdateDto))
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
@@ -132,7 +127,7 @@ class TermsConditionsControllerTest {
 
         TermsConditions testDoc = termsConditionsDataRepository.save(reqTestDoc);
 
-        mockMvc.perform(delete("/termsConditions/Terms")
+        mockMvc.perform(delete("/termsConditions")
                 .param("idx", testDoc.getIdx().toString())
         ).andDo(print())
                 .andExpect(status().isOk())
@@ -143,6 +138,7 @@ class TermsConditionsControllerTest {
 
 
     @Test
+    @WithMockCustomUser()
     void getTermsConditions() throws Exception {
         MUserInfo originSaveUser = mUserInfoDataRepository.findById("forutonawing").get();
 
@@ -153,7 +149,7 @@ class TermsConditionsControllerTest {
 
         TermsConditions testDoc = termsConditionsDataRepository.save(reqTestDoc);
 
-        mockMvc.perform(get("/termsConditions/Terms")
+        mockMvc.perform(get("/termsConditions")
                 .param("idx", testDoc.getIdx().toString()))
                 .andDo(print())
                 .andExpect(status().isOk())
