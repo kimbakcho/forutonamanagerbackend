@@ -34,7 +34,6 @@ class NoticeControllerTest extends TestBase {
     MUserInfoDataRepository mUserInfoDataRepository;
 
     @Test
-    @WithMockCustomUser
     void getNotices() throws Exception {
 
         MUserInfo mUserInfo = mUserInfoDataRepository.findById("forutonawing").get();
@@ -51,8 +50,9 @@ class NoticeControllerTest extends TestBase {
         mockMvc.perform(get("/notice")
                 .param("page", "0")
                 .param("size", "10")
-                .param("sort", "modifyDate,desc"))
+                .param("sort", "writerUid.userName,desc"))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andDo(
                         document("NoticeControllerTest", relaxedRequestParameters(
                                 parameterWithName("page").description("페이지"),

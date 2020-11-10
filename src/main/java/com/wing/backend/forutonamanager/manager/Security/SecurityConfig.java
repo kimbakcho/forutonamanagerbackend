@@ -65,6 +65,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/notice")
+                .permitAll();
+
+        http
+                .authorizeRequests()
                 .antMatchers("/SPALogin")
                 .authenticated();
 
