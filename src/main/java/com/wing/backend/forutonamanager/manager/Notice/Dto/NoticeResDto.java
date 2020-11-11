@@ -20,6 +20,7 @@ public class NoticeResDto {
         NoticeResDto noticeResDto = new NoticeResDto();
         noticeResDto.idx = notice.getIdx();
         noticeResDto.title = notice.getTitle();
+        noticeResDto.content = notice.getContent();
         noticeResDto.openFlag = notice.getOpenFlag();
         noticeResDto.writerUid = MUserInfoResDto.fromUserInfoResDto(notice.getWriterUid());
         noticeResDto.modifyDate = notice.getModifyDate();

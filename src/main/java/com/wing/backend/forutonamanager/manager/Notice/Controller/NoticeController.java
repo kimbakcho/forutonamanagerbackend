@@ -25,6 +25,11 @@ public class NoticeController {
         return noticeService.getNotices(pageable);
     }
 
+    @GetMapping(value = "/Idx")
+    public NoticeResDto getNotice(@RequestParam Integer idx){
+        return noticeService.getNotice(idx);
+    }
+
     @PostMapping
     public NoticeResDto insertNotice(
             @AuthenticationPrincipal CustomOAuth2User customOAuth2User,
