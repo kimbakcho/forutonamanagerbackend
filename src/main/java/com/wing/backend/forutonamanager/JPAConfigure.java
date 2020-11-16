@@ -82,7 +82,7 @@ public class JPAConfigure {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         Properties jpaProperties = new Properties();
-
+        jpaProperties.put("hibernate.dialect", "com.wing.backend.forutonamanager.CustomDialect");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.default_batch_fetch_size", "1000");
@@ -101,8 +101,7 @@ public class JPAConfigure {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         Properties jpaProperties = new Properties();
-
-        jpaProperties.put("hibernate.dialect", "com.wing.forutona.CustomDialect");
+        jpaProperties.put("hibernate.dialect", "com.wing.backend.forutonamanager.CustomDialect");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.use_sql_comment", "true");
@@ -121,7 +120,7 @@ public class JPAConfigure {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         Properties jpaProperties = new Properties();
-
+        jpaProperties.put("hibernate.dialect", "com.wing.backend.forutonamanager.CustomDialect");
 //        jpaProperties.put("hibernate.show_sql", "true");
 //        jpaProperties.put("hibernate.format_sql", "true");
 //        jpaProperties.put("hibernate.use_sql_comment", "true");
@@ -140,6 +139,7 @@ public class JPAConfigure {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.dialect", "com.wing.backend.forutonamanager.CustomDialect");
         jpaProperties.put("hibernate.show_sql", "true");
         jpaProperties.put("hibernate.format_sql", "true");
         jpaProperties.put("hibernate.default_batch_fetch_size", "1000");

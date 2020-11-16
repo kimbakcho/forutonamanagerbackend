@@ -34,6 +34,9 @@ server:
     key-store-type: PKCS12
     key-alias: bns-ssl
 
+forutona:
+  serviekeypath: C:\\Users\\backho\\Desktop\\forutonadata\\adminsdkservicekey\\forutona-firebase-adminsdk-p6ho6-ab85124646.json
+  storgeserviekeypath: C:\\Users\\backho\\Desktop\\forutonadata\\adminsdkservicekey\\Forutona-3539edf2b36d.json
 ---
 spring:
   profiles: realtest
@@ -59,5 +62,8 @@ server:
       force: true
       enabled: true
 
+forutona:
+  serviekeypath: /home/forutona/servicekeys/forutona-firebase-adminsdk-p6ho6-ab85124646.json
+  storgeserviekeypath: /home/forutona/servicekeys/Forutona-3539edf2b36d.json
 
 ---
