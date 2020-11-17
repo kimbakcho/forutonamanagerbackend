@@ -19,6 +19,7 @@ public class EventManagementResDto {
     Boolean allowComments;
     LocalDateTime eventStartDateTime;
     LocalDateTime eventEndDateTime;
+    Integer views;
     Double eventStartPositionLat;
     Double eventStarPositionLng;
     String listThumbnail;
@@ -38,7 +39,7 @@ public class EventManagementResDto {
         resDto.allowComments = eventManagement.getAllowComments();
         resDto.eventStartDateTime = eventManagement.getEventStartDateTime();
         resDto.eventEndDateTime = eventManagement.getEventEndDateTime();
-
+        resDto.views = eventManagement.getViews();
         resDto.eventStartPositionLat = eventManagement.getEventStartPositionLat();
         resDto.eventStarPositionLng = eventManagement.getEventStarPositionLng();
         resDto.listThumbnail = eventManagement.getListThumbnail();

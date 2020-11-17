@@ -28,6 +28,7 @@ public class EventManagement {
     Boolean allowComments;
     LocalDateTime eventStartDateTime;
     LocalDateTime eventEndDateTime;
+    Integer views;
     @Column(columnDefinition = "geometry(Point,4326)")
     Point eventStartPosition;
     Double eventStartPositionLat;
@@ -62,6 +63,7 @@ public class EventManagement {
         this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
         this.detailedDescription = detailedDescription;
         this.writerUid = writerUid;
+        this.views = 0;
     }
 
     Point getPlacePoint(double longitude, double latitude) {
