@@ -34,8 +34,6 @@ public class EventManagement {
     Double eventStarPositionLng;
     String listThumbnail;
 
-
-
     String detailPageThumbnail;
     String detailedDescription;
     String webViewArea;
@@ -83,5 +81,52 @@ public class EventManagement {
 
     public void setWebViewArea(String webViewArea) {
         this.webViewArea = webViewArea;
+    }
+
+
+    public void setCategory(EventCategoryType category) {
+        this.category = category;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public void setOpen(Boolean open) {
+        isOpen = open;
+    }
+
+    public void setAllowComments(Boolean allowComments) {
+        this.allowComments = allowComments;
+    }
+
+    public void setEventStartDateTime(LocalDateTime eventStartDateTime) {
+        this.eventStartDateTime = eventStartDateTime;
+    }
+
+    public void setEventEndDateTime(LocalDateTime eventEndDateTime) {
+        this.eventEndDateTime = eventEndDateTime;
+    }
+
+    public void setEventStartPositionLat(Double eventStartPositionLat) {
+        this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
+        this.eventStartPositionLat = eventStartPositionLat;
+    }
+
+    public void setEventStarPositionLng(Double eventStarPositionLng) {
+        this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
+        this.eventStarPositionLng = eventStarPositionLng;
+    }
+
+    public void setDetailedDescription(String detailedDescription) {
+        this.detailedDescription = detailedDescription;
+    }
+
+    public void setWriterUid(MUserInfo writerUid) {
+        this.writerUid = writerUid;
     }
 }

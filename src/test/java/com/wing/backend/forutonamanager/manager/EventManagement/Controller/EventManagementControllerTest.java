@@ -7,6 +7,7 @@ import com.wing.backend.forutonamanager.SecurityTestUtil.WithMockCustomUser;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventCategoryType;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventManagement;
 import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementInsertReqDto;
+import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementUpdateReqDto;
 import com.wing.backend.forutonamanager.manager.EventManagement.Repository.EventManagementDataRepository;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Domain.MUserInfo;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Repository.MUserInfoDataRepository;
@@ -22,8 +23,7 @@ import java.time.LocalDateTime;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -208,6 +208,83 @@ class EventManagementControllerTest extends TestBase {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
+
+    }
+
+    @Test
+    @WithMockCustomUser
+    void updateEventManagement() throws Exception {
+        //given
+        MUserInfo writer = mUserInfoDataRepository.findById("forutonatest").get();
+        EventManagement event = EventManagement.builder()
+                .isOpen(true)
+                .eventStartPositionLat(37.00255267215955)
+                .eventStarPositionLng(126.18347167968749)
+                .eventStartDateTime(LocalDateTime.now())
+                .eventEndDateTime(LocalDateTime.now().plusDays(1))
+                .detailedDescription("<html><body>test</body></html>")
+                .allowComments(true)
+                .subTitle("sub Title")
+                .title("title")
+                .category(EventCategoryType.DEFAULT)
+                .writerUid(writer)
+                .build();
+
+        EventManagement saveEvent = eventManagementDataRepository.save(event);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        EventManagementUpdateReqDto eventManagementUpdateReqDto = new EventManagementUpdateReqDto();
+        eventManagementUpdateReqDto.setIdx(saveEvent.getIdx());
+        eventManagementUpdateReqDto.setAllowComments(false);
+        eventManagementUpdateReqDto.setCategory(EventCategoryType.DEFAULT);
+        eventManagementUpdateReqDto.setDetailedDescription(event.getDetailedDescription());
+        eventManagementUpdateReqDto.setEventStartDateTime(LocalDateTime.now());
+        eventManagementUpdateReqDto.setEventEndDateTime(LocalDateTime.now().plusDays(2));
+        eventManagementUpdateReqDto.setEventStarPositionLng(event.getEventStarPositionLng());
+        eventManagementUpdateReqDto.setEventStartPositionLat(event.getEventStartPositionLat());
+        eventManagementUpdateReqDto.setIsOpen(true);
+        eventManagementUpdateReqDto.setSubTitle("change SubText");
+        eventManagementUpdateReqDto.setTitle("change Title");
+
+        //when
+        mockMvc.perform(put("/eventManagement")
+                .content(objectMapper.writeValueAsString(eventManagementUpdateReqDto))
+            .contentType(MediaType.APPLICATION_JSON))
+            .andDo(print())
+                .andDo(document("EventManagement", relaxedRequestFields(
+                        fieldWithPath("idx").description("이벤트 문서 번호"),
+                        fieldWithPath("category").description("카테고리"),
+                        fieldWithPath("title").description("제목"),
+                        fieldWithPath("subTitle").description("부 제목"),
+                        fieldWithPath("isOpen").description("공개 여부"),
+                        fieldWithPath("allowComments").description("댓글 가능 여부"),
+                        fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
+                        fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
+                        fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)"),
+                        fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)")
+                        ),relaxedResponseFields(
+                        fieldWithPath("idx").description("event 고유 Id"),
+                        fieldWithPath("category").description("카테고리"),
+                        fieldWithPath("title").description("제목"),
+                        fieldWithPath("subTitle").description("부 제목"),
+                        fieldWithPath("isOpen").description("공개 여부"),
+                        fieldWithPath("allowComments").description("댓글 가능 여부"),
+                        fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
+                        fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
+                        fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("listThumbnail").description("listThumbnail Url"),
+                        fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
+                        fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
+                        fieldWithPath("webViewArea").description("HTML 파일 URL"),
+                        fieldWithPath("writerUid.userName").description("작성자")))
+                );
+
+
+        //then
 
     }
 }

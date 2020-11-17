@@ -3,6 +3,7 @@ package com.wing.backend.forutonamanager.manager.EventManagement.Controller;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventSearchType;
 import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementInsertReqDto;
 import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementResDto;
+import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementUpdateReqDto;
 import com.wing.backend.forutonamanager.manager.EventManagement.Service.EventManagementSearch.EventManagementSearchService;
 import com.wing.backend.forutonamanager.manager.EventManagement.Service.EventManagementSearch.EventManagementSearchServiceFactory;
 import com.wing.backend.forutonamanager.manager.EventManagement.Service.EventManagementService;
@@ -52,5 +53,17 @@ public class EventManagementController {
     Page<EventManagementResDto> getEventManagement(EventSearchType eventSearchType, Pageable pageable) throws Exception {
         EventManagementSearchService instance = eventManagementSearchServiceFactory.getInstance(eventSearchType);
         return instance.search(pageable);
+    }
+
+    @PutMapping
+    EventManagementResDto updateEventManagement(
+            @AuthenticationPrincipal CustomOAuth2User customOAuth2User,
+            @RequestBody EventManagementUpdateReqDto eventManagementUpdateReqDto){
+        return eventManagementService.updateEventManagement(customOAuth2User,eventManagementUpdateReqDto);
+    }
+
+    @DeleteMapping
+    void deleteEventManagement(@RequestParam Integer idx){
+        eventManagementService.deleteEventManagement(idx);
     }
 }

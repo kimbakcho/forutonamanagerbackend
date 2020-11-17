@@ -7,6 +7,7 @@ import com.wing.backend.forutonamanager.Google.GoogleStorageAdmin;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventManagement;
 import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementInsertReqDto;
 import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementResDto;
+import com.wing.backend.forutonamanager.manager.EventManagement.Dto.EventManagementUpdateReqDto;
 import com.wing.backend.forutonamanager.manager.EventManagement.Repository.EventManagementDataRepository;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Domain.MUserInfo;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Repository.MUserInfoDataRepository;
@@ -31,7 +32,7 @@ public class EventManagementService {
     final GoogleStorageAdmin googleStorageAdmin;
 
     public EventManagementResDto insertEventManagement(CustomOAuth2User customOAuth2User,
-                                                       EventManagementInsertReqDto reqDto){
+                                                       EventManagementInsertReqDto reqDto) {
 
         MUserInfo writer = mUserInfoDataRepository.findById(customOAuth2User.getMUserInfo().getUid()).get();
 
@@ -80,13 +81,34 @@ public class EventManagementService {
         int extentIndex = resourceFile.getOriginalFilename().lastIndexOf(".");
         String extent = resourceFile.getOriginalFilename().substring(extentIndex);
         String Uuid = UUID.randomUUID().toString();
-        BlobId blobId = BlobId.of("publicforutona", "eventresource/"+ eventIdx +"/"+Uuid+extent);
+        BlobId blobId = BlobId.of("publicforutona", "eventresource/" + eventIdx + "/" + Uuid + extent);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(resourceFile.getContentType()).build();
-        storage.create(blobInfo, resourceFile.getBytes() );
-        String imageUrl = "https://storage.googleapis.com/publicforutona/eventresource/" + eventIdx +"/"+Uuid+extent;
+        storage.create(blobInfo, resourceFile.getBytes());
+        String imageUrl = "https://storage.googleapis.com/publicforutona/eventresource/" + eventIdx + "/" + Uuid + extent;
         return imageUrl;
     }
 
 
+    public EventManagementResDto updateEventManagement(CustomOAuth2User customOAuth2User,
+                                                       EventManagementUpdateReqDto reqDto) {
+        MUserInfo writer = mUserInfoDataRepository.findById(customOAuth2User.getMUserInfo().getUid()).get();
+        EventManagement eventManagement = eventManagementDataRepository.findById(reqDto.getIdx()).get();
+        eventManagement.setTitle(reqDto.getTitle());
+        eventManagement.setSubTitle(reqDto.getSubTitle());
+        eventManagement.setCategory(reqDto.getCategory());
+        eventManagement.setDetailedDescription(reqDto.getDetailedDescription());
+        eventManagement.setEventStartDateTime(reqDto.getEventStartDateTime());
+        eventManagement.setEventEndDateTime(reqDto.getEventEndDateTime());
+        eventManagement.setEventStarPositionLng(eventManagement.getEventStarPositionLng());
+        eventManagement.setEventStartPositionLat(eventManagement.getEventStartPositionLat());
+        eventManagement.setAllowComments(eventManagement.getAllowComments());
+        eventManagement.setOpen(eventManagement.getIsOpen());
+        eventManagement.setWriterUid(writer);
 
+        return EventManagementResDto.fromEventManagement(eventManagement);
+    }
+
+    public void deleteEventManagement(Integer idx) {
+        eventManagementDataRepository.deleteById(idx);
+    }
 }
