@@ -73,6 +73,7 @@ public class EventManagement {
         return point;
     }
 
+
     public void setListThumbnail(String listThumbnail) {
         this.listThumbnail = listThumbnail;
     }
