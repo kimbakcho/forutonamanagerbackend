@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public interface EventManagementDataRepository extends JpaRepository<EventManagement,Integer> {
 
-    Page<EventManagement> findByEventStartDateTimeBefore(LocalDateTime now, Pageable pageable);
+    Page<EventManagement> findByEventStartDateTimeAfter(LocalDateTime now, Pageable pageable);
     Page<EventManagement> findByEventEndDateTimeBefore(LocalDateTime now, Pageable pageable);
-    Page<EventManagement> findByEventStartDateTimeAfterAndEventEndDateTimeBefore(LocalDateTime now1,LocalDateTime now2,Pageable pageable);
+    Page<EventManagement> findByEventStartDateTimeBeforeAndEventEndDateTimeAfter(LocalDateTime now1,LocalDateTime now2,Pageable pageable);
 }

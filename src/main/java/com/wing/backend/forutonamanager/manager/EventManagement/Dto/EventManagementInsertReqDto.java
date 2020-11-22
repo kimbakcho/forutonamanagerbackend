@@ -23,6 +23,8 @@ public class EventManagementInsertReqDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime eventEndDateTime;
     Double eventStartPositionLat;
-    Double eventStarPositionLng;
+    Double eventStartPositionLng;
+    String detailAddress;
+
     String detailedDescription;
 }

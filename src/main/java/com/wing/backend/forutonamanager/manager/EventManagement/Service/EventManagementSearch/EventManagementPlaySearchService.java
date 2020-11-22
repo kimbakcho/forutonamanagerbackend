@@ -22,7 +22,7 @@ public class EventManagementPlaySearchService implements EventManagementSearchSe
     public Page<EventManagementResDto> search(Pageable pageable) {
         LocalDateTime now = LocalDateTime.now();
         Page<EventManagement> managements = eventManagementDataRepository
-                .findByEventStartDateTimeAfterAndEventEndDateTimeBefore(now, now, pageable);
+                .findByEventStartDateTimeBeforeAndEventEndDateTimeAfter(now, now, pageable);
         return managements.map(x->EventManagementResDto.fromEventManagement(x));
     }
 }

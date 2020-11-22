@@ -22,6 +22,7 @@ public class EventManagementResDto {
     Integer views;
     Double eventStartPositionLat;
     Double eventStarPositionLng;
+    String detailAddress;
     String listThumbnail;
     String detailPageThumbnail;
     String detailedDescription;
@@ -42,6 +43,7 @@ public class EventManagementResDto {
         resDto.views = eventManagement.getViews();
         resDto.eventStartPositionLat = eventManagement.getEventStartPositionLat();
         resDto.eventStarPositionLng = eventManagement.getEventStarPositionLng();
+        resDto.detailAddress = eventManagement.getDetailAddress();
         resDto.listThumbnail = eventManagement.getListThumbnail();
         resDto.detailPageThumbnail = eventManagement.getDetailPageThumbnail();
         resDto.detailedDescription = eventManagement.getDetailedDescription();

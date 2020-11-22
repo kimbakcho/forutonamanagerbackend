@@ -23,6 +23,8 @@ import java.time.LocalDateTime;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.relaxedRequestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,9 +49,10 @@ class EventManagementControllerTest extends TestBase {
         reqDto.setAllowComments(true);
         reqDto.setCategory(EventCategoryType.DEFAULT);
         reqDto.setDetailedDescription("TEST");
+        reqDto.setDetailAddress("detail Address");
         reqDto.setEventEndDateTime(LocalDateTime.now().plusDays(1));
         reqDto.setEventStartDateTime(LocalDateTime.now());
-        reqDto.setEventStarPositionLng(126.18347167968749);
+        reqDto.setEventStartPositionLng(126.18347167968749);
         reqDto.setEventStartPositionLat(37.00255267215955);
         reqDto.setIsOpen(true);
 
@@ -68,8 +71,9 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
                         fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)"),
-                        fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)")
+                        fieldWithPath("detailAddress").description("상세 주소")
                         ),relaxedResponseFields(
                         fieldWithPath("idx").description("event 고유 Id"),
                         fieldWithPath("category").description("카테고리"),
@@ -85,6 +89,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
                         fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
                         fieldWithPath("webViewArea").description("HTML 파일 URL"),
+                        fieldWithPath("detailAddress").description("상세 주소"),
                         fieldWithPath("writerUid.userName").description("작성자")))
                 );
 
@@ -104,6 +109,7 @@ class EventManagementControllerTest extends TestBase {
                 .eventStartDateTime(LocalDateTime.now())
                 .eventEndDateTime(LocalDateTime.now().plusDays(1))
                 .detailedDescription("<html><body>test</body></html>")
+                .detailAddress("detailAddress")
                 .allowComments(true)
                 .subTitle("sub Title")
                 .title("title")
@@ -120,6 +126,7 @@ class EventManagementControllerTest extends TestBase {
 
         MockMultipartFile firstFile = new MockMultipartFile("listThumbnail",
                 "Thumbnail.PNG", "image/png", testThumbnail);
+
 
         //when
         mockMvc.perform(multipart("/eventManagement/listThumbnail")
@@ -144,6 +151,7 @@ class EventManagementControllerTest extends TestBase {
                 .eventStartDateTime(LocalDateTime.now())
                 .eventEndDateTime(LocalDateTime.now().plusDays(1))
                 .detailedDescription("<html><body>test</body></html>")
+                .detailAddress("detailAddress")
                 .allowComments(true)
                 .subTitle("sub Title")
                 .title("title")
@@ -184,6 +192,7 @@ class EventManagementControllerTest extends TestBase {
                 .eventStartDateTime(LocalDateTime.now())
                 .eventEndDateTime(LocalDateTime.now().plusDays(1))
                 .detailedDescription("<html><body>test</body></html>")
+                .detailAddress("detailAddress")
                 .allowComments(true)
                 .subTitle("sub Title")
                 .title("title")
@@ -223,6 +232,7 @@ class EventManagementControllerTest extends TestBase {
                 .eventStartDateTime(LocalDateTime.now())
                 .eventEndDateTime(LocalDateTime.now().plusDays(1))
                 .detailedDescription("<html><body>test</body></html>")
+                .detailAddress("detailAddress")
                 .allowComments(true)
                 .subTitle("sub Title")
                 .title("title")
@@ -241,7 +251,8 @@ class EventManagementControllerTest extends TestBase {
         eventManagementUpdateReqDto.setDetailedDescription(event.getDetailedDescription());
         eventManagementUpdateReqDto.setEventStartDateTime(LocalDateTime.now());
         eventManagementUpdateReqDto.setEventEndDateTime(LocalDateTime.now().plusDays(2));
-        eventManagementUpdateReqDto.setEventStarPositionLng(event.getEventStarPositionLng());
+        eventManagementUpdateReqDto.setDetailAddress("test DetailAddress");
+        eventManagementUpdateReqDto.setEventStartPositionLng(event.getEventStarPositionLng());
         eventManagementUpdateReqDto.setEventStartPositionLat(event.getEventStartPositionLat());
         eventManagementUpdateReqDto.setIsOpen(true);
         eventManagementUpdateReqDto.setSubTitle("change SubText");
@@ -264,7 +275,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
                         fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)"),
-                        fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)")
+                        fieldWithPath("detailAddress").description("상세 주소")
                         ),relaxedResponseFields(
                         fieldWithPath("idx").description("event 고유 Id"),
                         fieldWithPath("category").description("카테고리"),
@@ -280,11 +291,61 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
                         fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
                         fieldWithPath("webViewArea").description("HTML 파일 URL"),
+                        fieldWithPath("detailAddress").description("상세 주소"),
                         fieldWithPath("writerUid.userName").description("작성자")))
                 );
 
+        //then
+    }
+
+
+    @Test
+    @WithMockCustomUser
+    void getEventManagementIdx() throws Exception {
+        MUserInfo writer = mUserInfoDataRepository.findById("forutonatest").get();
+        EventManagement event = EventManagement.builder()
+                .isOpen(true)
+                .eventStartPositionLat(37.00255267215955)
+                .eventStarPositionLng(126.18347167968749)
+                .eventStartDateTime(LocalDateTime.now())
+                .eventEndDateTime(LocalDateTime.now().plusDays(1))
+                .detailedDescription("<html><body>test</body></html>")
+                .allowComments(true)
+                .detailAddress("detailAddress")
+                .subTitle("sub Title")
+                .title("title")
+                .category(EventCategoryType.DEFAULT)
+                .writerUid(writer)
+                .build();
+
+        EventManagement saveEvent = eventManagementDataRepository.save(event);
+
+        //when
+        mockMvc.perform(get("/eventManagement/idx")
+                .param("idx",saveEvent.getIdx().toString())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andDo(document("EventManagement", relaxedRequestParameters(
+                        parameterWithName("idx").description("event 고유 Id")
+                        ),relaxedResponseFields(
+                        fieldWithPath("idx").description("event 고유 Id"),
+                        fieldWithPath("category").description("카테고리"),
+                        fieldWithPath("title").description("제목"),
+                        fieldWithPath("subTitle").description("부 제목"),
+                        fieldWithPath("isOpen").description("공개 여부"),
+                        fieldWithPath("allowComments").description("댓글 가능 여부"),
+                        fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
+                        fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
+                        fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("listThumbnail").description("listThumbnail Url"),
+                        fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
+                        fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
+                        fieldWithPath("webViewArea").description("HTML 파일 URL"),
+                        fieldWithPath("detailAddress").description("상세 주소"),
+                        fieldWithPath("writerUid.userName").description("작성자")))
+                );
 
         //then
-
     }
 }

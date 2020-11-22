@@ -44,8 +44,9 @@ public class EventManagementService {
                 .detailedDescription(reqDto.getDetailedDescription())
                 .eventStartDateTime(reqDto.getEventStartDateTime())
                 .eventEndDateTime(reqDto.getEventEndDateTime())
-                .eventStarPositionLng(reqDto.getEventStarPositionLng())
+                .eventStarPositionLng(reqDto.getEventStartPositionLng())
                 .eventStartPositionLat(reqDto.getEventStartPositionLat())
+                .detailAddress(reqDto.getDetailAddress())
                 .isOpen(reqDto.getIsOpen())
                 .writerUid(writer)
                 .build();
@@ -53,26 +54,64 @@ public class EventManagementService {
         return EventManagementResDto.fromEventManagement(eventManagementDataRepository.save(event));
     }
 
+    public EventManagementResDto getEventManagement(Integer eventIdx) {
+        EventManagement eventManagement = eventManagementDataRepository.findById(eventIdx).get();
+        return EventManagementResDto.fromEventManagement(eventManagement);
+    }
+
 
     public EventManagementResDto updateListThumbnail(MultipartFile listThumbnail,
                                                      Integer eventIdx) throws IOException {
-        String imageUrl = uploadEventResource(listThumbnail, eventIdx);
         EventManagement eventManagement = eventManagementDataRepository.findById(eventIdx).get();
-        eventManagement.setListThumbnail(imageUrl);
+
+        String listThumbnailUrl = eventManagement.getListThumbnail();
+        if(listThumbnailUrl != null && listThumbnailUrl.length() > 0){
+            this.deleteEventResource(eventManagement.getListThumbnail());
+        }
+
+        if(listThumbnail != null){
+            String imageUrl = uploadEventResource(listThumbnail, eventIdx);
+            eventManagement.setListThumbnail(imageUrl);
+        }else {
+            eventManagement.setListThumbnail(null);
+        }
+
         return EventManagementResDto.fromEventManagement(eventManagement);
     }
 
     public EventManagementResDto updateDetailPageThumbnail(MultipartFile detailPageThumbnail, Integer eventIdx) throws IOException {
-        String imageUrl = uploadEventResource(detailPageThumbnail, eventIdx);
         EventManagement eventManagement = eventManagementDataRepository.findById(eventIdx).get();
-        eventManagement.setDetailPageThumbnail(imageUrl);
+
+        String detailPageThumbnailUrl = eventManagement.getDetailPageThumbnail();
+        if(detailPageThumbnailUrl != null && detailPageThumbnailUrl.length() > 0){
+            this.deleteEventResource(eventManagement.getDetailPageThumbnail());
+        }
+
+        if(detailPageThumbnail != null){
+            String imageUrl = uploadEventResource(detailPageThumbnail, eventIdx);
+            eventManagement.setDetailPageThumbnail(imageUrl);
+        }else {
+            eventManagement.setDetailPageThumbnail(null);
+        }
+
         return EventManagementResDto.fromEventManagement(eventManagement);
     }
 
     public EventManagementResDto updateWebViewArea(MultipartFile webViewArea, Integer eventIdx) throws IOException {
-        String htmlUrl = uploadEventResource(webViewArea, eventIdx);
         EventManagement eventManagement = eventManagementDataRepository.findById(eventIdx).get();
-        eventManagement.setWebViewArea(htmlUrl);
+
+        String webViewUrl = eventManagement.getWebViewArea();
+        if(webViewUrl != null && webViewUrl.length() > 0){
+            this.deleteEventResource(eventManagement.getWebViewArea());
+        }
+
+        if(webViewArea != null){
+            String htmlUrl = uploadEventResource(webViewArea, eventIdx);
+            eventManagement.setWebViewArea(htmlUrl);
+        }else {
+            eventManagement.setWebViewArea(null);
+        }
+
         return EventManagementResDto.fromEventManagement(eventManagement);
     }
 
@@ -88,6 +127,14 @@ public class EventManagementService {
         return imageUrl;
     }
 
+    private void deleteEventResource(String url) throws IOException {
+        Storage storage = googleStorageAdmin.GetStorageInstance();
+        String replaceUrl = url.replace("https://storage.googleapis.com/publicforutona/", "");
+        BlobId blobId = BlobId.of("publicforutona", replaceUrl);
+        storage.delete(blobId);
+    }
+
+
 
     public EventManagementResDto updateEventManagement(CustomOAuth2User customOAuth2User,
                                                        EventManagementUpdateReqDto reqDto) {
@@ -99,16 +146,26 @@ public class EventManagementService {
         eventManagement.setDetailedDescription(reqDto.getDetailedDescription());
         eventManagement.setEventStartDateTime(reqDto.getEventStartDateTime());
         eventManagement.setEventEndDateTime(reqDto.getEventEndDateTime());
-        eventManagement.setEventStarPositionLng(eventManagement.getEventStarPositionLng());
-        eventManagement.setEventStartPositionLat(eventManagement.getEventStartPositionLat());
-        eventManagement.setAllowComments(eventManagement.getAllowComments());
-        eventManagement.setOpen(eventManagement.getIsOpen());
+        eventManagement.setEventStarPositionLng(reqDto.getEventStartPositionLng());
+        eventManagement.setEventStartPositionLat(reqDto.getEventStartPositionLat());
+        eventManagement.setDetailAddress(reqDto.getDetailAddress());
+        eventManagement.setAllowComments(reqDto.getAllowComments());
+        eventManagement.setOpen(reqDto.getIsOpen());
         eventManagement.setWriterUid(writer);
-
         return EventManagementResDto.fromEventManagement(eventManagement);
     }
 
-    public void deleteEventManagement(Integer idx) {
+    public void deleteEventManagement(Integer idx) throws IOException {
+        EventManagement eventManagement = eventManagementDataRepository.findById(idx).get();
+        if(eventManagement.getListThumbnail() != null && eventManagement.getListThumbnail().length()> 0){
+            deleteEventResource(eventManagement.getListThumbnail());
+        }
+        if(eventManagement.getDetailPageThumbnail() != null && eventManagement.getDetailPageThumbnail().length() > 0){
+            deleteEventResource(eventManagement.getDetailPageThumbnail());
+        }
+        if(eventManagement.getWebViewArea() != null && eventManagement.getWebViewArea().length() > 0){
+            deleteEventResource(eventManagement.getWebViewArea());
+        }
         eventManagementDataRepository.deleteById(idx);
     }
 }

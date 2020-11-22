@@ -28,11 +28,11 @@ public class EventManagement {
     Boolean allowComments;
     LocalDateTime eventStartDateTime;
     LocalDateTime eventEndDateTime;
-    Integer views;
     @Column(columnDefinition = "geometry(Point,4326)")
     Point eventStartPosition;
     Double eventStartPositionLat;
     Double eventStarPositionLng;
+    String detailAddress;
     String listThumbnail;
 
     String detailPageThumbnail;
@@ -48,7 +48,7 @@ public class EventManagement {
                            String subTitle, Boolean isOpen,
                            Boolean allowComments, LocalDateTime eventStartDateTime,
                            LocalDateTime eventEndDateTime, Double eventStartPositionLat,
-                           Double eventStarPositionLng,
+                           Double eventStarPositionLng,String detailAddress,
                            String detailedDescription,
                            MUserInfo writerUid) {
         this.category = category;
@@ -61,9 +61,9 @@ public class EventManagement {
         this.eventStartPositionLat = eventStartPositionLat;
         this.eventStarPositionLng = eventStarPositionLng;
         this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
+        this.detailAddress = detailAddress;
         this.detailedDescription = detailedDescription;
         this.writerUid = writerUid;
-        this.views = 0;
     }
 
     Point getPlacePoint(double longitude, double latitude) {
@@ -130,5 +130,9 @@ public class EventManagement {
 
     public void setWriterUid(MUserInfo writerUid) {
         this.writerUid = writerUid;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 }

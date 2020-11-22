@@ -30,7 +30,6 @@ public class EventManagementController {
     EventManagementResDto insertEventManagement(
             @AuthenticationPrincipal CustomOAuth2User customOAuth2User,
             @RequestBody EventManagementInsertReqDto eventManagementInsertReqDto){
-
         return eventManagementService.insertEventManagement(customOAuth2User,eventManagementInsertReqDto);
     }
 
@@ -55,6 +54,11 @@ public class EventManagementController {
         return instance.search(pageable);
     }
 
+    @GetMapping("/idx")
+    EventManagementResDto getEventManagementIdx(Integer idx) throws Exception {
+        return eventManagementService.getEventManagement(idx);
+    }
+
     @PutMapping
     EventManagementResDto updateEventManagement(
             @AuthenticationPrincipal CustomOAuth2User customOAuth2User,
@@ -63,7 +67,7 @@ public class EventManagementController {
     }
 
     @DeleteMapping
-    void deleteEventManagement(@RequestParam Integer idx){
+    void deleteEventManagement(@RequestParam Integer idx) throws IOException {
         eventManagementService.deleteEventManagement(idx);
     }
 }

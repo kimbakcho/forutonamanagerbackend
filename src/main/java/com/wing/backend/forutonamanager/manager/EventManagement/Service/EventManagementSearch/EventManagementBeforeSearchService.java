@@ -20,7 +20,7 @@ public class EventManagementBeforeSearchService implements EventManagementSearch
     
     @Override
     public Page<EventManagementResDto> search(Pageable pageable) {
-        Page<EventManagement> byEventStartDateTimeBefore = eventManagementDataRepository.findByEventStartDateTimeBefore(LocalDateTime.now(), pageable);
+        Page<EventManagement> byEventStartDateTimeBefore = eventManagementDataRepository.findByEventStartDateTimeAfter(LocalDateTime.now(), pageable);
         return byEventStartDateTimeBefore.map(x->EventManagementResDto.fromEventManagement(x));
     }
 }
