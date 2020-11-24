@@ -70,8 +70,8 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)"),
                         fieldWithPath("detailAddress").description("상세 주소")
                         ),relaxedResponseFields(
@@ -84,7 +84,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("listThumbnail").description("listThumbnail Url"),
                         fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
                         fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
@@ -252,7 +252,7 @@ class EventManagementControllerTest extends TestBase {
         eventManagementUpdateReqDto.setEventStartDateTime(LocalDateTime.now());
         eventManagementUpdateReqDto.setEventEndDateTime(LocalDateTime.now().plusDays(2));
         eventManagementUpdateReqDto.setDetailAddress("test DetailAddress");
-        eventManagementUpdateReqDto.setEventStartPositionLng(event.getEventStarPositionLng());
+        eventManagementUpdateReqDto.setEventStartPositionLng(event.getEventStartPositionLng());
         eventManagementUpdateReqDto.setEventStartPositionLat(event.getEventStartPositionLat());
         eventManagementUpdateReqDto.setIsOpen(true);
         eventManagementUpdateReqDto.setSubTitle("change SubText");
@@ -273,7 +273,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("detailedDescription").description("이벤트 상세 설명(HTML)"),
                         fieldWithPath("detailAddress").description("상세 주소")
                         ),relaxedResponseFields(
@@ -286,7 +286,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("listThumbnail").description("listThumbnail Url"),
                         fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
                         fieldWithPath("detailedDescription").description("상세 설명(HTML)"),
@@ -337,7 +337,7 @@ class EventManagementControllerTest extends TestBase {
                         fieldWithPath("eventStartDateTime").description("이벤트 시작 시간"),
                         fieldWithPath("eventEndDateTime").description("이벤트 종료 시간"),
                         fieldWithPath("eventStartPositionLat").description("이벤트 시작 위치"),
-                        fieldWithPath("eventStarPositionLng").description("이벤트 시작 위치"),
+                        fieldWithPath("eventStartPositionLng").description("이벤트 시작 위치"),
                         fieldWithPath("listThumbnail").description("listThumbnail Url"),
                         fieldWithPath("detailPageThumbnail").description("detailPageThumbnail Url"),
                         fieldWithPath("detailedDescription").description("상세 설명(HTML)"),

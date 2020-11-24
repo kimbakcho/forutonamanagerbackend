@@ -146,7 +146,7 @@ public class EventManagementService {
         eventManagement.setDetailedDescription(reqDto.getDetailedDescription());
         eventManagement.setEventStartDateTime(reqDto.getEventStartDateTime());
         eventManagement.setEventEndDateTime(reqDto.getEventEndDateTime());
-        eventManagement.setEventStarPositionLng(reqDto.getEventStartPositionLng());
+        eventManagement.setEventStartPositionLng(reqDto.getEventStartPositionLng());
         eventManagement.setEventStartPositionLat(reqDto.getEventStartPositionLat());
         eventManagement.setDetailAddress(reqDto.getDetailAddress());
         eventManagement.setAllowComments(reqDto.getAllowComments());

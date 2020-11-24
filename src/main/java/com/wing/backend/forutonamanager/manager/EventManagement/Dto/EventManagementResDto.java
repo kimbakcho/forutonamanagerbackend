@@ -1,12 +1,10 @@
 package com.wing.backend.forutonamanager.manager.EventManagement.Dto;
 
-import com.vividsolutions.jts.geom.Point;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventCategoryType;
 import com.wing.backend.forutonamanager.manager.EventManagement.Domain.EventManagement;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Dto.MUserInfoResDto;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,7 +19,7 @@ public class EventManagementResDto {
     LocalDateTime eventEndDateTime;
     Integer views;
     Double eventStartPositionLat;
-    Double eventStarPositionLng;
+    Double eventStartPositionLng;
     String detailAddress;
     String listThumbnail;
     String detailPageThumbnail;
@@ -42,7 +40,7 @@ public class EventManagementResDto {
         resDto.eventEndDateTime = eventManagement.getEventEndDateTime();
         resDto.views = eventManagement.getViews();
         resDto.eventStartPositionLat = eventManagement.getEventStartPositionLat();
-        resDto.eventStarPositionLng = eventManagement.getEventStarPositionLng();
+        resDto.eventStartPositionLng = eventManagement.getEventStartPositionLng();
         resDto.detailAddress = eventManagement.getDetailAddress();
         resDto.listThumbnail = eventManagement.getListThumbnail();
         resDto.detailPageThumbnail = eventManagement.getDetailPageThumbnail();

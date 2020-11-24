@@ -32,7 +32,7 @@ public class EventManagement {
     @Column(columnDefinition = "geometry(Point,4326)")
     Point eventStartPosition;
     Double eventStartPositionLat;
-    Double eventStarPositionLng;
+    Double eventStartPositionLng;
     String detailAddress;
     String listThumbnail;
 
@@ -56,11 +56,12 @@ public class EventManagement {
         this.title = title;
         this.subTitle = subTitle;
         this.isOpen = isOpen;
+        this.views = 0;
         this.allowComments = allowComments;
         this.eventStartDateTime = eventStartDateTime;
         this.eventEndDateTime = eventEndDateTime;
         this.eventStartPositionLat = eventStartPositionLat;
-        this.eventStarPositionLng = eventStarPositionLng;
+        this.eventStartPositionLng = eventStarPositionLng;
         this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
         this.detailAddress = detailAddress;
         this.detailedDescription = detailedDescription;
@@ -117,13 +118,13 @@ public class EventManagement {
     }
 
     public void setEventStartPositionLat(Double eventStartPositionLat) {
-        this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
+        this.eventStartPosition = getPlacePoint(eventStartPositionLng,eventStartPositionLat);
         this.eventStartPositionLat = eventStartPositionLat;
     }
 
-    public void setEventStarPositionLng(Double eventStarPositionLng) {
+    public void setEventStartPositionLng(Double eventStarPositionLng) {
         this.eventStartPosition = getPlacePoint(eventStarPositionLng,eventStartPositionLat);
-        this.eventStarPositionLng = eventStarPositionLng;
+        this.eventStartPositionLng = eventStarPositionLng;
     }
 
     public void setDetailedDescription(String detailedDescription) {
