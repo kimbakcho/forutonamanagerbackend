@@ -28,6 +28,7 @@ public class EventManagement {
     Boolean allowComments;
     LocalDateTime eventStartDateTime;
     LocalDateTime eventEndDateTime;
+    Integer views;
     @Column(columnDefinition = "geometry(Point,4326)")
     Point eventStartPosition;
     Double eventStartPositionLat;
