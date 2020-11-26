@@ -2,6 +2,8 @@ package com.wing.backend.forutonamanager.Preference;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Properties;
+
 
 public interface CustomPreference {
     String loginSuccessRedirectUrl();
@@ -14,4 +16,12 @@ public interface CustomPreference {
     String oauth2registrationId();
     String oauth2clientId();
     String oauth2clientSecret();
+    String getManagerDataSourceUserName();
+    String getManagerDataSourcePassword();
+    String getManagerDataSourceUrl();
+    Properties getManagerJpaProperties();
+    String getForutonaAppDataSourceUserName();
+    String getForutonaAppDataSourcePassword();
+    String getForutonaAppDataSourceUrl();
+    Properties getForutonaAppJpaProperties();
 }
