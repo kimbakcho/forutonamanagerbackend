@@ -36,6 +36,7 @@ public class ManagerJPAConfigure {
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(customPreference.getManagerJpaProperties());
+        em.setPersistenceUnitName("manager");
         return em;
     }
 

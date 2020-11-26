@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("local")
 @AutoConfigureRestDocs
 @Import(RestDocsConfiguration.class)
+@EnableTransactionManagement
 @Transactional
 public class TestBase {
     @Autowired
