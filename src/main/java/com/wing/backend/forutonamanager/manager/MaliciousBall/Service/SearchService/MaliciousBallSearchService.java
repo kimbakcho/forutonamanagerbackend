@@ -39,7 +39,9 @@ public abstract class MaliciousBallSearchService {
                     if (OpBallSimpleResDto.isPresent()) {
                         FBallSimpleResDto fBallSimpleResDto = OpBallSimpleResDto.get();
                         resDto.setBallName(fBallSimpleResDto.getBallName());
-                        resDto.setMakerNickName("");
+                        resDto.setMakerNickName(fBallSimpleResDto.getUid().getNickName());
+                        resDto.setBallMakeTime(fBallSimpleResDto.getMakeTime());
+                        resDto.setBallHits(fBallSimpleResDto.getBallHits());
                     } else {
                         resDto.setBallName("don't find");
                         resDto.setMakerNickName("don't find");

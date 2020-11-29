@@ -12,4 +12,6 @@ public class MaliciousBallService {
 
     final MaliciousBallDataRepository maliciousBallDataRepository;
 
+
+
 }

@@ -20,8 +20,8 @@ public class FBall {
   private String ballUuid;
 
   @JoinColumn(name = "uid")
-  @ManyToOne(fetch = FetchType.LAZY)
-  private FUserInfo uid;
+  @ManyToOne
+  FUserInfo uid;
 
   private Double longitude;
   private Double latitude;

@@ -26,7 +26,6 @@ public class FUserInfoResDto {
     private String isoCode;
     private double latitude;
     private double longitude;
-
     private LocalDateTime positionUpdateTime;
     private double userLevel;
     private double expPoint;

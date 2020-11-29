@@ -17,8 +17,6 @@ import java.util.List;
 
 import static com.wing.backend.forutonamanager.forutona.FBall.Domain.QFBall.fBall;
 
-
-
 @Component
 public class FBallQueryRepository {
 

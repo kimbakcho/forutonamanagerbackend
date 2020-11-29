@@ -12,6 +12,8 @@ public class MaliciousBallResDto {
      String ballUuid;
      String ballName;
      String makerNickName;
+     Long ballHits;
+     LocalDateTime ballMakeTime;
      Integer totalNumberReports;
      Integer crime;
      Integer abuse;

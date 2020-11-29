@@ -32,5 +32,19 @@ public class MaliciousBall {
   @ManyToOne(fetch = FetchType.LAZY)
   private MUserInfo judgmentUid;
 
+  public void setMaliciousContentFlag(Integer maliciousContentFlag) {
+    this.maliciousContentFlag = maliciousContentFlag;
+  }
 
+  public void setFalseReportFlag(Integer falseReportFlag) {
+    this.falseReportFlag = falseReportFlag;
+  }
+
+  public void setJudgmentTime(LocalDateTime judgmentTime) {
+    this.judgmentTime = judgmentTime;
+  }
+
+  public void setJudgmentUid(MUserInfo judgmentUid) {
+    this.judgmentUid = judgmentUid;
+  }
 }
