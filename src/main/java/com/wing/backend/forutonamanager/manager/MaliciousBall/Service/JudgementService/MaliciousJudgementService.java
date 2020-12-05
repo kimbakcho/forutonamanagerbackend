@@ -4,4 +4,5 @@ import com.wing.backend.forutonamanager.manager.MaliciousBall.Dto.MaliciousBallR
 
 public interface MaliciousJudgementService {
     MaliciousBallResDto judgement();
+
 }

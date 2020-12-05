@@ -51,7 +51,7 @@ public class FUserInfoResDto {
     private long alarmSponNewContent;
     private long deactivation;
     private double playerPower;
-    private long maliciousUserLevel;
+    private long maliciousCount;
     private LocalDateTime stopPeriod;
 
     public static FUserInfoResDto fromFUserInfo(FUserInfo fUserInfo) {
@@ -98,7 +98,7 @@ public class FUserInfoResDto {
         fUserInfoResDto.alarmSponNewContent = fUserInfo.getAlarmSponNewContent();
         fUserInfoResDto.deactivation = fUserInfo.getDeactivation();
         fUserInfoResDto.playerPower = fUserInfo.getPlayerPower();
-        fUserInfoResDto.maliciousUserLevel = fUserInfo.getMaliciousUserLevel();
+        fUserInfoResDto.maliciousCount = fUserInfo.getMaliciousCount();
         fUserInfoResDto.stopPeriod = fUserInfo.getStopPeriod();
         return fUserInfoResDto;
     }

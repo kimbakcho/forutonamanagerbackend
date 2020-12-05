@@ -23,8 +23,8 @@ public class MaliciousBall {
   private Integer sexual;
   private Integer advertising;
   private Integer etc;
-  private Integer maliciousContentFlag;
-  private Integer falseReportFlag;
+  private Boolean maliciousContentFlag;
+  private Boolean falseReportFlag;
 
   private LocalDateTime judgmentTime;
 
@@ -32,11 +32,11 @@ public class MaliciousBall {
   @ManyToOne(fetch = FetchType.LAZY)
   private MUserInfo judgmentUid;
 
-  public void setMaliciousContentFlag(Integer maliciousContentFlag) {
+  public void setMaliciousContentFlag(Boolean maliciousContentFlag) {
     this.maliciousContentFlag = maliciousContentFlag;
   }
 
-  public void setFalseReportFlag(Integer falseReportFlag) {
+  public void setFalseReportFlag(Boolean falseReportFlag) {
     this.falseReportFlag = falseReportFlag;
   }
 

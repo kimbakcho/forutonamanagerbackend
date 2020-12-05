@@ -21,8 +21,8 @@ public class MaliciousBallResDto {
      Integer sexual;
      Integer advertising;
      Integer etc;
-     Integer maliciousContentFlag;
-     Integer falseReportFlag;
+     Boolean maliciousContentFlag;
+     Boolean falseReportFlag;
      LocalDateTime judgmentTime;
      MUserInfoResDto judgmentUid;
 

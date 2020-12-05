@@ -59,7 +59,15 @@ public class FUserInfo {
   private Long alarmSponNewContent;
   private Long deactivation;
   private Double playerPower;
-  private Long maliciousUserLevel;
+
+  private Long maliciousCount;
   private LocalDateTime stopPeriod;
 
+  public void setMaliciousCount(Long maliciousCount) {
+    this.maliciousCount = maliciousCount;
+  }
+
+  public void setStopPeriod(LocalDateTime stopPeriod) {
+    this.stopPeriod = stopPeriod;
+  }
 }

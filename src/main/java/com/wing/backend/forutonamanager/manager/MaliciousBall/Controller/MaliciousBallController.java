@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ public class MaliciousBallController {
     }
 
     @PutMapping()
+    @Transactional
     public MaliciousBallResDto updateJudgement(@AuthenticationPrincipal CustomOAuth2User customOAuth2User,
                                                Integer idx, MaliciousJudgementType maliciousJudgementType)
             throws Exception {
