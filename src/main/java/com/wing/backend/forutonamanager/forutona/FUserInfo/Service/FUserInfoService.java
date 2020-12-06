@@ -4,6 +4,7 @@ import com.wing.backend.forutonamanager.forutona.FUserInfo.Domain.FUserInfo;
 import com.wing.backend.forutonamanager.forutona.FUserInfo.Domain.MaliciousLevel;
 import com.wing.backend.forutonamanager.forutona.FUserInfo.Dto.FUserInfoResDto;
 import com.wing.backend.forutonamanager.forutona.FUserInfo.Repository.FUserInfoDataRepository;
+import com.wing.backend.forutonamanager.forutona.FUserInfo.Repository.FUserInfoQueryRepository;
 import com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Domain.MaliciousType;
 import com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Service.UserInfoMaliciousHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ import static com.wing.backend.forutonamanager.forutona.FUserInfo.Domain.Malicio
 public class FUserInfoService {
 
     final FUserInfoDataRepository fUserInfoDataRepository;
+
+    final FUserInfoQueryRepository fUserInfoQueryRepository;
 
     final UserInfoMaliciousHistoryService userInfoMaliciousHistoryService;
 
@@ -53,4 +56,8 @@ public class FUserInfoService {
         return FUserInfoResDto.fromFUserInfo(fUserInfoDataRepository.findById(uid).get()) ;
     }
 
+    public List<FUserInfoResDto> userUidToFUserInfo(List<String> userCollect) {
+        List<FUserInfo> byUidToFUserInfo = fUserInfoQueryRepository.findByUidToFUserInfo(userCollect);
+        return byUidToFUserInfo.stream().map(x-> FUserInfoResDto.fromFUserInfo(x)).collect(Collectors.toList());
+    }
 }

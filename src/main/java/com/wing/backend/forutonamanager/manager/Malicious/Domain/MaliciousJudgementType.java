@@ -1,4 +1,4 @@
-package com.wing.backend.forutonamanager.manager.MaliciousBall.Domain;
+package com.wing.backend.forutonamanager.manager.Malicious.Domain;
 
 public enum MaliciousJudgementType {
     MaliciousContent,FalseReport

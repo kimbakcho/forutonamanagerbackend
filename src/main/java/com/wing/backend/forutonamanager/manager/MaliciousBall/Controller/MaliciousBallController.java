@@ -1,12 +1,12 @@
 package com.wing.backend.forutonamanager.manager.MaliciousBall.Controller;
 
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousBall;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousBallSearchType;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousJudgementType;
+import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousSearchType;
+import com.wing.backend.forutonamanager.manager.Malicious.Domain.MaliciousJudgementType;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Dto.MaliciousBallResDto;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Repository.MaliciousBallDataRepository;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Service.JudgementService.MaliciousJudgementService;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Service.JudgementService.MaliciousJudgementServiceFactory;
+import com.wing.backend.forutonamanager.manager.Malicious.Service.JudgementService.MaliciousJudgementService;
+import com.wing.backend.forutonamanager.manager.MaliciousBall.Service.JudgementService.MaliciousBallJudgementServiceFactory;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Service.SearchService.MaliciousBallSearchServiceFactory;
 import com.wing.backend.forutonamanager.manager.Security.CustomOAuth2User;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +26,12 @@ public class MaliciousBallController {
 
     final MaliciousBallSearchServiceFactory maliciousBallSearchServiceFactory;
 
-    final MaliciousJudgementServiceFactory maliciousJudgementServiceFactory;
+    final MaliciousBallJudgementServiceFactory maliciousBallJudgementServiceFactory;
 
     final MaliciousBallDataRepository maliciousBallDataRepository;
 
     @GetMapping
-    public Page<MaliciousBallResDto> getPage(MaliciousBallSearchType searchType, Pageable pageable)
+    public Page<MaliciousBallResDto> getPage(MaliciousSearchType searchType, Pageable pageable)
             throws Exception {
         return maliciousBallSearchServiceFactory.getInstance(searchType).search(pageable);
     }
@@ -47,7 +47,7 @@ public class MaliciousBallController {
     public MaliciousBallResDto updateJudgement(@AuthenticationPrincipal CustomOAuth2User customOAuth2User,
                                                Integer idx, MaliciousJudgementType maliciousJudgementType)
             throws Exception {
-        MaliciousJudgementService instance = maliciousJudgementServiceFactory.getInstance(
+        MaliciousJudgementService instance = maliciousBallJudgementServiceFactory.getInstance(
                 maliciousJudgementType, idx,customOAuth2User);
         return instance.judgement();
     }

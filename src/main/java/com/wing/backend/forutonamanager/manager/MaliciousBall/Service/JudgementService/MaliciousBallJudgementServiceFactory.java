@@ -4,7 +4,9 @@ import com.wing.backend.forutonamanager.forutona.FBall.Service.FBallService;
 import com.wing.backend.forutonamanager.forutona.FUserInfo.Service.FUserInfoService;
 import com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Service.UserInfoMaliciousHistoryService;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Repository.MUserInfoDataRepository;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousJudgementType;
+import com.wing.backend.forutonamanager.manager.Malicious.Domain.MaliciousJudgementType;
+import com.wing.backend.forutonamanager.manager.Malicious.Service.JudgementService.MaliciousJudgementService;
+import com.wing.backend.forutonamanager.manager.MaliciousBall.Dto.MaliciousBallResDto;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Repository.MaliciousBallDataRepository;
 import com.wing.backend.forutonamanager.manager.Security.CustomOAuth2User;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MaliciousJudgementServiceFactory {
+public class MaliciousBallJudgementServiceFactory {
 
     final MaliciousBallDataRepository maliciousBallDataRepository;
 
@@ -24,14 +26,14 @@ public class MaliciousJudgementServiceFactory {
 
     final UserInfoMaliciousHistoryService userInfoMaliciousHistoryService;
 
-    public MaliciousJudgementService getInstance(MaliciousJudgementType type, Integer idx, CustomOAuth2User customOAuth2User) throws Exception {
+    public MaliciousJudgementService<MaliciousBallResDto> getInstance(MaliciousJudgementType type, Integer idx, CustomOAuth2User customOAuth2User) throws Exception {
         switch (type) {
             case MaliciousContent:
-                return new MaliciousContentService(idx, maliciousBallDataRepository,
+                return new MaliciousBallContentService(idx, maliciousBallDataRepository,
                         mUserInfoDataRepository, customOAuth2User,
                         fBallService,fUserInfoService);
             case FalseReport:
-                return new MaliciousFalseReportService(idx, maliciousBallDataRepository,
+                return new MaliciousBallFalseReportService(idx, maliciousBallDataRepository,
                         mUserInfoDataRepository, userInfoMaliciousHistoryService, fBallService, customOAuth2User);
             default:
                 throw new Exception("don't Support");

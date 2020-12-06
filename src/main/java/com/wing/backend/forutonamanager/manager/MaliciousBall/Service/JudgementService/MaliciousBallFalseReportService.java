@@ -6,6 +6,7 @@ import com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Domain
 import com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Service.UserInfoMaliciousHistoryService;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Domain.MUserInfo;
 import com.wing.backend.forutonamanager.manager.MUserInfo.Repository.MUserInfoDataRepository;
+import com.wing.backend.forutonamanager.manager.Malicious.Service.JudgementService.MaliciousJudgementService;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousBall;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Dto.MaliciousBallResDto;
 import com.wing.backend.forutonamanager.manager.MaliciousBall.Repository.MaliciousBallDataRepository;
@@ -13,7 +14,7 @@ import com.wing.backend.forutonamanager.manager.Security.CustomOAuth2User;
 
 import java.time.LocalDateTime;
 
-public class MaliciousFalseReportService implements MaliciousJudgementService{
+public class MaliciousBallFalseReportService implements MaliciousJudgementService<MaliciousBallResDto> {
     final Integer idx;
     final MaliciousBallDataRepository maliciousBallDataRepository;
     final MUserInfoDataRepository mUserInfoDataRepository;
@@ -23,10 +24,10 @@ public class MaliciousFalseReportService implements MaliciousJudgementService{
     final FBallService fBallService;
 
     final CustomOAuth2User customOAuth2User;
-    public MaliciousFalseReportService(Integer idx, MaliciousBallDataRepository maliciousBallDataRepository,
-                                       MUserInfoDataRepository mUserInfoDataRepository,
-                                       UserInfoMaliciousHistoryService userInfoMaliciousHistoryService,
-                                       FBallService fBallService, CustomOAuth2User customOAuth2User) {
+    public MaliciousBallFalseReportService(Integer idx, MaliciousBallDataRepository maliciousBallDataRepository,
+                                           MUserInfoDataRepository mUserInfoDataRepository,
+                                           UserInfoMaliciousHistoryService userInfoMaliciousHistoryService,
+                                           FBallService fBallService, CustomOAuth2User customOAuth2User) {
         this.idx = idx;
         this.maliciousBallDataRepository = maliciousBallDataRepository;
         this.mUserInfoDataRepository = mUserInfoDataRepository;

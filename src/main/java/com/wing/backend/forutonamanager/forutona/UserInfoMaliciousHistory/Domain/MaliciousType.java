@@ -2,5 +2,7 @@ package com.wing.backend.forutonamanager.forutona.UserInfoMaliciousHistory.Domai
 
 public enum  MaliciousType {
     MaliciousBallContent,
-    MaliciousBallFalseReport
+    MaliciousBallFalseReport,
+    MaliciousProfileContent,
+    MaliciousProfileFalseReport
 }

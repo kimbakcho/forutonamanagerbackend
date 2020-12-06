@@ -2,8 +2,8 @@ package com.wing.backend.forutonamanager.manager.MaliciousBall.Controller;
 
 import com.wing.backend.forutonamanager.SecurityTestUtil.TestBase;
 import com.wing.backend.forutonamanager.SecurityTestUtil.WithMockCustomUser;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousBallSearchType;
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousJudgementType;
+import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousSearchType;
+import com.wing.backend.forutonamanager.manager.Malicious.Domain.MaliciousJudgementType;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -30,7 +30,7 @@ class MaliciousBallControllerTest extends TestBase {
         mockMvc.perform(
                 get("/maliciousBall")
                         .param("searchType",
-                                String.valueOf(MaliciousBallSearchType.BEFORE_JUDGMENT))
+                                String.valueOf(MaliciousSearchType.BEFORE_JUDGMENT))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andDo(document(

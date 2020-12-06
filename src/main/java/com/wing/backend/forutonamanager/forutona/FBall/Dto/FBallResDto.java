@@ -1,13 +1,9 @@
 package com.wing.backend.forutonamanager.forutona.FBall.Dto;
 
-import com.vividsolutions.jts.geom.Point;
 import com.wing.backend.forutonamanager.forutona.FBall.Domain.FBall;
-import com.wing.backend.forutonamanager.forutona.FUserInfo.Domain.FUserInfo;
 import com.wing.backend.forutonamanager.forutona.FUserInfo.Dto.FUserInfoResDto;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -43,7 +39,7 @@ public class FBallResDto {
     private String description;
     private Long contributor;
     private Long ballDeleteFlag;
-    private Long maliciousContentLevel;
+    private Boolean maliciousBall;
 
     public static FBallResDto fromFBall(FBall fBall){
         FBallResDto fBallResDto = new FBallResDto();
@@ -77,7 +73,7 @@ public class FBallResDto {
         fBallResDto.description = fBall.getDescription();
         fBallResDto.contributor = fBall.getContributor();
         fBallResDto.ballDeleteFlag = fBall.getBallDeleteFlag();
-        fBallResDto.maliciousContentLevel = fBall.getMaliciousContentLevel();
+        fBallResDto.maliciousBall = fBall.getMaliciousBall();
         return fBallResDto;
     }
 

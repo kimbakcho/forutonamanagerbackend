@@ -28,4 +28,9 @@ public class FBallService {
         FBall fBall = fBallDataRepository.findById(ballUuid).get();
         return FBallResDto.fromFBall(fBall);
     }
+
+    public void updateMaliciousBall(String ballUuid){
+        FBall fBall = fBallDataRepository.findById(ballUuid).get();
+        fBall.setMaliciousBall(true);
+    }
 }

@@ -1,6 +1,6 @@
 package com.wing.backend.forutonamanager.manager.MaliciousBall.Service.SearchService;
 
-import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousBallSearchType;
+import com.wing.backend.forutonamanager.manager.MaliciousBall.Domain.MaliciousSearchType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +14,8 @@ public class MaliciousBallSearchServiceFactory {
 
     final MaliciousBallMaliciousContentSearchService maliciousBallMaliciousContentSearchService;
 
-    public MaliciousBallSearchService getInstance(MaliciousBallSearchType maliciousBallSearchType) throws Exception {
-        switch (maliciousBallSearchType) {
+    public MaliciousBallSearchService getInstance(MaliciousSearchType maliciousSearchType) throws Exception {
+        switch (maliciousSearchType) {
             case BEFORE_JUDGMENT:
                 return maliciousBallBeforeJudgmentSearchService;
             case MALICIOUS_CONTENT:

@@ -53,8 +53,9 @@ public class FBall {
   private String description;
   private Long contributor;
   private Long ballDeleteFlag;
-  private Long maliciousContentLevel;
+  private Boolean maliciousBall;
 
-
-
+  public void setMaliciousBall(Boolean maliciousBall) {
+    this.maliciousBall = maliciousBall;
+  }
 }
