@@ -47,7 +47,7 @@ public class MaliciousBallController {
     public MaliciousBallResDto updateJudgement(@AuthenticationPrincipal CustomOAuth2User customOAuth2User,
                                                Integer idx, MaliciousJudgementType maliciousJudgementType)
             throws Exception {
-        MaliciousJudgementService instance = maliciousBallJudgementServiceFactory.getInstance(
+        MaliciousJudgementService<MaliciousBallResDto> instance = maliciousBallJudgementServiceFactory.getInstance(
                 maliciousJudgementType, idx,customOAuth2User);
         return instance.judgement();
     }
