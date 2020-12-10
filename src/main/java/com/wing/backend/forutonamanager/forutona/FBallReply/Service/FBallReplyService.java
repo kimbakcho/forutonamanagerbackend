@@ -24,6 +24,12 @@ public class FBallReplyService {
         return FBallReplyResDto.fromFBallReply(fBallReplyRepository.findById(replyUuid).get());
     }
 
+    public FBallReplyResDto updateMaliciousReply(String replyUuid){
+        FBallReply fBallReply = fBallReplyRepository.findById(replyUuid).get();
+        fBallReply.setMaliciousFlag(true);
+        return FBallReplyResDto.fromFBallReply(fBallReply);
+    }
+
     public List<FBallReplyResDto> replyUuidToFBallReplyResDtos(List<String> replyUuids){
         List<FBallReply> byReplyUuidToFBallReply = fBallReplyQueryRepository.findByReplyUuidToFBallReply(replyUuids);
         return byReplyUuidToFBallReply.stream().map(x -> FBallReplyResDto.fromFBallReply(x)).collect(Collectors.toList());

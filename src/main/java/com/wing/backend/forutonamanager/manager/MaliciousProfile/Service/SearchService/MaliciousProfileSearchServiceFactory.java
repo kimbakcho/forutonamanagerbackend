@@ -15,7 +15,6 @@ public class MaliciousProfileSearchServiceFactory {
     final MaliciousProfileMaliciousContentSearchService maliciousProfileMaliciousContentSearchService;
 
     public MaliciousProfileSearchService getInstance(MaliciousSearchType maliciousSearchType) throws Exception {
-
         switch (maliciousSearchType){
             case BEFORE_JUDGMENT:
                 return maliciousProfileBeforeJudgmentSearchService;

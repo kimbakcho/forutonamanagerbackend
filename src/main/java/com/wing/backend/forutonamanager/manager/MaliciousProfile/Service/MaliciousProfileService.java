@@ -17,6 +17,5 @@ public class MaliciousProfileService {
     public MaliciousProfileResDto getMaliciousProfile(Integer idx){
         MaliciousProfile maliciousProfile = maliciousProfileDataRepository.findById(idx).get();
         return MaliciousProfileResDto.fromMaliciousProfile(maliciousProfile);
-
     }
 }

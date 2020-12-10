@@ -68,7 +68,6 @@ class MaliciousProfileControllerTest extends TestBase {
                         relaxedResponseFields(
                                 fieldWithPath("idx").description("신고 번호"),
                                 fieldWithPath("uid").description("신고된 유저 uid"),
-                                fieldWithPath("uid").description("신고된 유저 uid"),
                                 fieldWithPath("totalNumberReports").description("총 신고 횟수"),
                                 fieldWithPath("crime").description("범죄 또는 이를 조장"),
                                 fieldWithPath("abuse").description("욕설, 차별, 사칭 등 타인에 대한 위협 및 피해"),

@@ -34,5 +34,19 @@ public class MaliciousReply {
     @ManyToOne
     private MUserInfo judgmentUid;
 
+    public void setMaliciousContentFlag(Boolean maliciousContentFlag) {
+        this.maliciousContentFlag = maliciousContentFlag;
+    }
 
+    public void setFalseReportFlag(Boolean falseReportFlag) {
+        this.falseReportFlag = falseReportFlag;
+    }
+
+    public void setJudgmentTime(LocalDateTime judgmentTime) {
+        this.judgmentTime = judgmentTime;
+    }
+
+    public void setJudgmentUid(MUserInfo judgmentUid) {
+        this.judgmentUid = judgmentUid;
+    }
 }

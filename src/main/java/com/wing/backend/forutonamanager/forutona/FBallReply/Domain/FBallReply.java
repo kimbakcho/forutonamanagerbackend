@@ -36,5 +36,10 @@ public class FBallReply {
   private LocalDateTime replyUpdateDateTime;
   private Boolean deleteFlag;
 
+  private Boolean maliciousFlag;
 
+
+  public void setMaliciousFlag(Boolean maliciousFlag) {
+    this.maliciousFlag = maliciousFlag;
+  }
 }

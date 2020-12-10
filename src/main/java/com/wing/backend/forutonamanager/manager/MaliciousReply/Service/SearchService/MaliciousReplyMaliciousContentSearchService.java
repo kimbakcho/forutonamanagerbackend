@@ -11,19 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class MaliciousReplyBeforeJudgmentSearchService extends MaliciousReplySearchService{
+public class MaliciousReplyMaliciousContentSearchService extends MaliciousReplySearchService{
 
     final MaliciousReplyDataRepository maliciousReplyDataRepository;
 
-    public MaliciousReplyBeforeJudgmentSearchService(FBallReplyService fBallReplyService,
-                                                     MaliciousReplyDataRepository maliciousReplyDataRepository) {
+    public MaliciousReplyMaliciousContentSearchService(FBallReplyService fBallReplyService,
+                                                       MaliciousReplyDataRepository maliciousReplyDataRepository) {
         super(fBallReplyService);
         this.maliciousReplyDataRepository = maliciousReplyDataRepository;
     }
 
     @Override
     public Page<MaliciousReplyPageItemResDto> search(Pageable pageable) {
-        Page<MaliciousReply> byJudgmentUidNull = this.maliciousReplyDataRepository.findByJudgmentUidNull(pageable);
-        return makeMaliciousReplyPageItemResDto(byJudgmentUidNull);
+        Page<MaliciousReply> byMaliciousContentFlagTrue = maliciousReplyDataRepository.findByMaliciousContentFlagTrue(pageable);
+        return makeMaliciousReplyPageItemResDto(byMaliciousContentFlagTrue);
     }
 }
